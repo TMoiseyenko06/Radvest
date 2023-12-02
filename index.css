@@ -1,0 +1,524 @@
+/* Reset some default margin and padding for the body and header */
+body,
+header {
+    margin: 0;
+    padding: 0;
+    background-color: #f5ecdd;
+    color: #e6e5e0;
+}
+
+@font-face {
+    font-family: Gel;
+    src: url(GeraldtonLight.otf);
+}
+
+
+/* Define the black header style */
+.black-header {
+    background-color: #2f2e2e;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    /* You can adjust the padding to your preference */
+    z-index: 1;
+    position: relative;
+    z-index: 1;
+}
+
+/* Style the navigation links */
+.black-header ul {
+    list-style: none;
+    padding: 0;
+    font-size: 20px;
+}
+
+.black-header li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.black-header a {
+    text-decoration: none;
+    color: white;
+}
+
+.black-header a:hover {
+    text-decoration: underline;
+}
+
+/* Remove margin and padding from the ul and li elements */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the list items (li) */
+li {
+    margin-right: 10px;
+    /* Add spacing between list items */
+    display: inline;
+    font-family: Gel;
+}
+
+/* Style the header to align the list to the left */
+.black-header {
+    display: flex;
+    /* Use flexbox for alignment */
+    justify-content: flex-start;
+    /* Align the content to the left */
+    align-items: center;
+    /* Center vertically within the header */
+    z-index: 1;
+}
+
+/* Style the image in the list */
+.header-logo img {
+    max-width: 100px;
+    /* Adjust the maximum width as needed */
+    height: auto;
+    /* To maintain the aspect ratio */
+}
+
+.active {
+    text-decoration: underline #c2434b;
+}
+
+h1 {
+    color: #2f2e2e;
+    font-size: 100px;
+}
+
+#into {
+    width: 100%;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+/* Style the image inside the banner */
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora';
+    z-index: 1;
+    opacity: 1;
+}
+
+.small-text {
+    font-size: 32px;
+    color: white;
+    text-align: center;
+}
+
+.large-text {
+    font-size: 64px;
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(245,236,221,0.1);
+ 
+    z-index: 1;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+.video {
+    text-align: center;
+    border: #c2434b;
+}
+
+.text {
+    text-align: left;
+    border: #c2434b;
+}
+
+p {
+    color: #2f2e2e;
+}
+
+h2 {
+    color: #2f2e2e;
+    font-size: 50px;
+    font-family: 'Lora';
+}
+
+
+
+.text {
+    font-family: Gel;
+    font-size: 25px;
+}
+
+
+
+.time {
+    height: 456px;
+    width: 20%;
+    border: 2px solid #2f2e2e;
+}
+
+.master {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: auto 10px;
+}
+
+.uno {
+    flex: 0 0 auto;
+    /* Maintain the size of "uno" */
+}
+
+.dos {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 2px solid #2f2e2e;
+    height: 459px;
+
+    text-align: center;
+}
+
+.tres {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 2px solid #2f2e2e;
+    height: 459px;
+
+    text-align: center;
+}
+
+.uno {
+    /* By default, take the full width of the viewport */
+    max-width: 816px;
+    /* Set a maximum width for the element */
+}
+
+
+
+.uno {
+    width: 100%;
+    /* Take the full width of the .master div */
+}
+
+.dos {
+    width: 20%;
+    /* Use a percentage width for .dos */
+}
+
+.tres {
+    width: 20%;
+    /* Use a percentage width for .tres */
+}
+
+.master {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    /* Allow the .master div to shrink as the viewport size decreases */
+    margin: 0 auto;
+    /* Center the .master div horizontally */
+    padding: 0 10px;
+    /* Optional padding for spacing */
+}
+
+
+
+.dos {
+    flex: 1;
+    /* Flex-grow property allows .dos to grow and shrink proportionally */
+}
+
+.tres {
+    flex: 1;
+    /* Flex-grow property allows .tres to grow and shrink proportionally */
+}
+
+
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio (16/9 = 1.7777) */
+    width: 100%;
+    /* Full width within .uno element */
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.dos,
+.tres {
+    flex: 0;
+    /* Don't allow .dos and .tres to grow, they will maintain their content size */
+    max-width: 20%;
+    /* Set a maximum width to prevent overlap */
+}
+
+.uno {
+    flex: 1;
+    /* Allow .uno to grow and fill up all remaining space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio (16/9 = 1.7777) */
+    width: 100%;
+    /* Full width within .uno element */
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bar {
+    width: 100%;
+    height:  45px;
+    background-color: #c2434b;
+    font-size: 25px;
+    font-family: Gel;
+    text-align: center;
+    margin-top: 0px;
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center vertically */
+    position: absolute;
+    z-index: 0;
+    color: #f5ecdd;
+    }
+
+.text{
+    width: 100%;
+    text-align: center;
+    color: #f5ecdd;
+   
+}
+
+#cam {
+    width: auto;
+    height: 25px;
+    
+}
+
+.bar2 {
+    width: 100%;
+    height: 450px;
+    background-color: #2f2e2e;
+    text-align: center;
+    justify-content: center;
+
+}
+
+.b1 {
+    border: 5px solid #f5ecdd;
+    border-radius: 10px;
+    height: 425px;
+    width: 300px;
+    margin: 10px;
+}
+.b2 {
+    border: 5px solid #f5ecdd;
+    border-radius: 10px;
+    height: 425px;
+    width: 300px;
+    margin: 10px;
+}
+.b3 {
+    border: 5px solid #f5ecdd;
+    border-radius: 10px;
+    height: 425px;
+    width: 300px;
+    margin: 10px;
+    text-align: center;
+
+}
+
+#bar {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: center;
+    justify-self: center;
+    margin: 0 auto;
+}
+
+#calimg {
+    width: 60%;
+    height: auto;
+    margin-top: 15px;
+}
+
+.b1, .b2, .b3 {
+    transition-duration: 1s;
+    text-align: center;
+    
+}
+
+
+.b3 > h2, .b3 > p, .b2 > h2 {
+    color: #f5ecdd;
+
+
+}
+
+.bar3 {
+    width: auto;
+    height: 150px;
+    background-color: #2f2e2e;
+    color: white;
+
+}
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Make the images invisible by default */
+.Containers {
+  display: none;
+}
+
+/* forward & Back buttons */
+.Back, .forward {
+  cursor: pointer;
+  position: absolute;
+  top: 48%;
+  width: auto;
+  margin-top: -23px;
+  padding: 17px;
+  color: grey;
+  font-weight: bold;
+  font-size: 19px;
+  transition: 0.4s ease;
+  border-radius: 0 5px 5px 0;
+  user-select: none;
+}
+
+/* Place the "forward button" to the right */
+.forward {
+  right: 0;
+  border-radius: 4px 0 0 4px;
+}
+
+/*when the user hovers,add a black background with some little opacity */
+.Back:hover, .forward:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption Info */
+.Info {
+  color: #e3e3e3;
+  font-size: 16px;
+  padding: 10px 14px;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Worknumbering (1/3 etc) */
+.MessageInfo {
+  color: #f2f2f3;
+  font-size: 14px;
+  padding: 10px 14px;
+  position: absolute;
+  top: 0;
+}
+
+/* The circles or bullets and indicators */
+.dots {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  margin: 0 3px;
+  background-color: #acc;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.5s ease;
+}
+
+.enable, .dots:hover {
+  background-color: #717161;
+}
+
+/* Faint animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.4s;
+  animation-name: fade;
+  animation-duration: 1.4s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .5}
+  to {opacity: 2}
+}
+
+@keyframes fade {
+  from {opacity: .5}
+  to {opacity: 2}
+}
+
+#videos-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 320px;
+    align-items: center;
+}
+
+#videos-container > iframe {
+    padding: 0px;
+    margin: 0px;
+}

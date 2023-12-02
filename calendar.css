@@ -1,0 +1,109 @@
+body,
+header {
+    margin: 0;
+    padding: 0;
+    background-color: #f5ecdd;
+    color: #e6e5e0;
+}
+
+@font-face {
+    font-family: Gel;
+    src: url(GeraldtonLight.otf);
+}
+
+
+
+.black-header {
+    background-color: #2f2e2e;
+    color: white;
+    text-align: center;
+    padding: 20px;
+
+    z-index: 1;
+    position: relative;
+    z-index: 1;
+}
+
+
+.black-header ul {
+    list-style: none;
+    padding: 0;
+    font-size: 20px;
+}
+
+.black-header li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.black-header a {
+    text-decoration: none;
+    color: white;
+}
+
+.black-header a:hover {
+    text-decoration: underline;
+}
+
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+li {
+    margin-right: 10px;
+
+    display: inline;
+    font-family: Gel;
+}
+
+
+.black-header {
+    display: flex;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+    z-index: 1;
+}
+
+
+.header-logo img {
+    max-width: 100px;
+
+    height: auto;
+
+}
+
+.active {
+    text-decoration: underline #c2434b;
+}
+
+h1 {
+    color: #2f2e2e;
+    font-size: 100px;
+}
+
+#into {
+    width: 100%;
+}
+
+.cal {
+    height: auto;
+    width: 75%;
+    text-align: center;
+    display: block;
+    text-align: center;
+    border: 5px solid #2f2e2e;
+}
+
+.calout {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
