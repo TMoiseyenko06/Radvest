@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#archive {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#video-container {
+    margin-top: 20px;
+}
+
+.video-item {
+    margin-bottom: 10px;
+}
