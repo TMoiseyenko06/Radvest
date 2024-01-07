@@ -54,42 +54,60 @@ function buildArchive() {
                 showMonths(year);
             }
 
-            function showMonths(selectedYear) {
-                const months = archiveData[selectedYear];
-                const monthButtons = [];
-
-                for (const month in months) {
-                    const monthButton = createButton(month, () => showDays(selectedYear, month));
-                    monthButtons.push(monthButton);
+            function showYears() {
+                const years = Object.keys(archiveData);
+                const yearButtons = [];
+        
+                for (const year of years) {
+                    const yearButton = createButton(year, () => toggleVisibility(year));
+                    yearButtons.push(yearButton);
                 }
-
-                // Display month buttons under the respective year
-                const yearIndex = Array.from(archiveElement.children).findIndex(child => child.innerText === selectedYear);
-                archiveElement.insertBefore(createButtonContainer(monthButtons), archiveElement.children[yearIndex + 1]);
+        
+                // Display year buttons in the archive
+                const buttonContainer = createButtonContainer(yearButtons);
+                buttonContainer.classList.add('years-container');
+                archiveElement.appendChild(buttonContainer);
+        
+                function toggleVisibility(selectedYear) {
+                    const container = buttonContainer.querySelector('.years-container');
+                    const yearIndex = Array.from(container.children).findIndex(child => child.innerText === selectedYear);
+        
+                    if (container.children[yearIndex + 1].style.display === 'none') {
+                        container.children[yearIndex + 1].style.display = 'block';
+                    } else {
+                        container.children[yearIndex + 1].style.display = 'none';
+                        // If you want to also hide the month and day buttons, add similar loops here
+                    }
+                }
+        
+                // Initially hide the year buttons
+                toggleVisibility(years[0]);
             }
-
+        
             function showDays(selectedYear, selectedMonth) {
                 const days = archiveData[selectedYear][selectedMonth];
                 const dayButtons = [];
-
+        
                 for (const day in days) {
                     const dayButton = createButton(day, () => showVideos(days[day]));
                     dayButtons.push(dayButton);
                 }
-
+        
                 // Display day buttons under the respective month
                 const monthIndex = Array.from(archiveElement.children).findIndex(child => child.innerText === selectedMonth);
-                archiveElement.insertBefore(createButtonContainer(dayButtons), archiveElement.children[monthIndex + 1]);
-            }
-
-            function showVideos(videos) {
-                // Display videos for the selected day
-                videoContainer.innerHTML = '';
-
-                videos.forEach(video => {
-                    const videoItem = createVideoItem(video);
-                    videoContainer.appendChild(videoItem);
-                });
+                const buttonContainer = createButtonContainer(dayButtons);
+                buttonContainer.classList.add('days-container');
+                archiveElement.insertBefore(buttonContainer, archiveElement.children[monthIndex + 1]);
+        
+                function showVideos(videos) {
+                    // Display videos for the selected day
+                    videoContainer.innerHTML = '';
+        
+                    videos.forEach(video => {
+                        const videoItem = createVideoItem(video);
+                        videoContainer.appendChild(videoItem);
+                    });
+                }
             }
         }
     });
