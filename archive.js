@@ -17,7 +17,8 @@ function init() {
 }
 
 function buildArchive() {
-    const archiveElement = document.getElementById('archive');
+    const yearDropdownBtn = document.getElementById('year-dropdown-btn');
+    const yearDropdownContent = document.getElementById('year-dropdown-content');
     const videoContainer = document.getElementById('video-container');
 
     // Fetch videos from the YouTube channel
@@ -34,98 +35,93 @@ function buildArchive() {
         videos.forEach(video => {
             const date = new Date(video.snippet.publishedAt);
             const year = date.getFullYear();
-            const month = date.getMonth() + 1; // Month is zero-based
-            const day = date.getDate();
 
-            if (!archiveData[year]) archiveData[year] = {};
-            if (!archiveData[year][month]) archiveData[year][month] = {};
-            if (!archiveData[year][month][day]) archiveData[year][month][day] = [];
-
-            archiveData[year][month][day].push(video);
+            if (!archiveData[year]) archiveData[year] = [];
+            archiveData[year].push(video);
         });
 
-        // Build the archive buttons
+        // Build the year dropdown menu
         for (const year in archiveData) {
-            const yearButton = createButton(year, () => showMonths(year));
-            archiveElement.appendChild(yearButton);
+            const yearBtn = document.createElement('button');
+            yearBtn.innerText = year;
+            yearBtn.addEventListener('click', () => showMonths(year));
 
-            // Initially, only display the current year's months
-            if (year == new Date().getFullYear()) {
-                showMonths(year);
+            yearDropdownContent.appendChild(yearBtn);
+        }
+
+        function showMonths(selectedYear) {
+            const months = archiveData[selectedYear];
+            const monthDropdownContent = createDropdownContent();
+
+            for (const month of months) {
+                const monthBtn = document.createElement('button');
+                monthBtn.innerText = new Date(month.snippet.publishedAt).toLocaleString('default', { month: 'long' });
+                monthBtn.addEventListener('click', () => showDays(month));
+
+                monthDropdownContent.appendChild(monthBtn);
             }
 
-            function showYears() {
-                const years = Object.keys(archiveData);
-                const yearButtons = [];
-        
-                for (const year of years) {
-                    const yearButton = createButton(year, () => toggleVisibility(year));
-                    yearButtons.push(yearButton);
-                }
-        
-                // Display year buttons in the archive
-                const buttonContainer = createButtonContainer(yearButtons);
-                buttonContainer.classList.add('years-container');
-                archiveElement.appendChild(buttonContainer);
-        
-                function toggleVisibility(selectedYear) {
-                    const container = buttonContainer.querySelector('.years-container');
-                    const yearIndex = Array.from(container.children).findIndex(child => child.innerText === selectedYear);
-        
-                    if (container.children[yearIndex + 1].style.display === 'none') {
-                        container.children[yearIndex + 1].style.display = 'block';
-                    } else {
-                        container.children[yearIndex + 1].style.display = 'none';
-                        // If you want to also hide the month and day buttons, add similar loops here
-                    }
-                }
-        
-                // Initially hide the year buttons
-                toggleVisibility(years[0]);
+            positionDropdown(monthDropdownContent, yearDropdownBtn);
+        }
+
+        function showDays(selectedMonth) {
+            const days = archiveData[selectedMonth.snippet.publishedAt.getFullYear()][selectedMonth.snippet.publishedAt.getMonth() + 1];
+            const dayDropdownContent = createDropdownContent();
+
+            for (const day of days) {
+                const dayBtn = document.createElement('button');
+                dayBtn.innerText = new Date(day.snippet.publishedAt).getDate();
+                dayBtn.addEventListener('click', () => showVideos(day));
+
+                dayDropdownContent.appendChild(dayBtn);
             }
-        
-            function showDays(selectedYear, selectedMonth) {
-                const days = archiveData[selectedYear][selectedMonth];
-                const dayButtons = [];
-        
-                for (const day in days) {
-                    const dayButton = createButton(day, () => showVideos(days[day]));
-                    dayButtons.push(dayButton);
-                }
-        
-                // Display day buttons under the respective month
-                const monthIndex = Array.from(archiveElement.children).findIndex(child => child.innerText === selectedMonth);
-                const buttonContainer = createButtonContainer(dayButtons);
-                buttonContainer.classList.add('days-container');
-                archiveElement.insertBefore(buttonContainer, archiveElement.children[monthIndex + 1]);
-        
-                function showVideos(videos) {
-                    // Display videos for the selected day
-                    videoContainer.innerHTML = '';
-        
-                    videos.forEach(video => {
-                        const videoItem = createVideoItem(video);
-                        videoContainer.appendChild(videoItem);
-                    });
+
+            positionDropdown(dayDropdownContent, yearDropdownBtn);
+        }
+
+        function showVideos(selectedDay) {
+            // Display videos for the selected day
+            videoContainer.innerHTML = '';
+
+            selectedDay.forEach(video => {
+                const videoItem = createVideoItem(video);
+                videoContainer.appendChild(videoItem);
+            });
+        }
+
+        function createDropdownContent() {
+            const dropdownContent = yearDropdownContent.cloneNode(true);
+            dropdownContent.style.display = 'block';
+            document.body.appendChild(dropdownContent);
+            return dropdownContent;
+        }
+
+        function positionDropdown(dropdownContent, referenceElement) {
+            const rect = referenceElement.getBoundingClientRect();
+            dropdownContent.style.left = rect.left + 'px';
+            dropdownContent.style.top = rect.bottom + 'px';
+
+            // Close the dropdown content when clicking outside of it
+            document.addEventListener('click', closeDropdown);
+
+            function closeDropdown(event) {
+                if (!event.target.closest('#dropdown-container')) {
+                    dropdownContent.style.display = 'none';
+                    document.removeEventListener('click', closeDropdown);
                 }
             }
         }
+
+        // Close the dropdown content when clicking outside of it
+        document.addEventListener('click', closeDropdown);
+
+        function closeDropdown(event) {
+            if (!event.target.closest('#dropdown-container')) {
+                yearDropdownContent.style.display = 'none';
+                document.removeEventListener('click', closeDropdown);
+            }
+        }
     });
-}
-
-function createButton(text, onClick) {
-    const button = document.createElement('div');
-    button.className = 'button';
-    button.innerText = text;
-    button.addEventListener('click', onClick);
-    return button;
-}
-
-function createButtonContainer(buttons) {
-    const container = document.createElement('div');
-    container.className = 'button-container';
-    container.append(...buttons);
-    return container;
 }
 
 function createVideoItem(video) {
