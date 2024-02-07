@@ -118,8 +118,9 @@ h1 {
     align-items: center;
     justify-content: center;
     font-family: 'Lora';
-    z-index: 1;
+    z-index: 2;
     opacity: 1;
+    pointer-events: none; /* Add this line */
 }
 
 .small-text {
@@ -135,16 +136,7 @@ h1 {
     margin: 0;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgb(245,236,221,0.1);
- 
-    z-index: 1;
-}
+
 
 .fade-in {
     opacity: 1;
@@ -522,3 +514,39 @@ h2 {
     padding: 0px;
     margin: 0px;
 }
+
+
+/* Updated CSS for dropdown styling */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 3; /* Ensure the dropdown is on top of other elements */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 4; /* Set a higher z-index for dropdown content */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Adjusted the following rule to make the dropdown persist on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    pointer-events: auto;
+}
+
+
